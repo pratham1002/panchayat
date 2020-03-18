@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Panchayat - New Post
+{% endblock %}
+
+{% block body %}
+{{message}}
+<br>
+<a href="home">Home</a>
+<br>
+<p>
+    Hello {{current_user.user.username}}
+    <br>
+    New Post
+    <br>
+</p>
+<div>
+    <form action="createPost" method="POST" accept="image/jpeg" enctype="multipart/form-data">
+        {% csrf_token %}
+        Enter Text : <br> <input type="text" name="text" required>
+        <br>
+        Enter Image : <br> <input type="file" name="image" required>
+        <br><br>
+        <input type="submit">
+    </form>
+    <br>
+</div>
+
+<a href="logout">Logout</a>
+{% endblock %}

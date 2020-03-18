@@ -4,3 +4,4 @@ main/main/__pycache__/**
 main/panchayat/migrations/
 main/panchayat/__pycache__/
 main/main/secrets.py
+main/media/

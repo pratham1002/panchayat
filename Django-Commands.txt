@@ -38,3 +38,5 @@ start server:
 
 handle images:
     pip install Pillow
+    - add media root in setting.py and urls.py of main
+    - add static root

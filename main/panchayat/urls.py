@@ -15,4 +15,7 @@ urlpatterns = [
     path('followPerson', afterLogin.followPerson),
     path('unfollowPerson', afterLogin.unfollowPerson),
     path('profile', afterLogin.profile),
+    path('newPost', afterLogin.newPost),
+    path('createPost', afterLogin.createPost),
+    path('feed', afterLogin.feed),
 ]

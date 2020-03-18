@@ -80,12 +80,50 @@ def profile(request):
     posts=Post.objects.filter(user=viewing_profile)
     followings = Following.objects.filter(user=current_user)
 
-    isFollowed=False
+    isFollowed = False
 
     for following in followings:
         if viewing_profile == following.following:
-            isFollowed=True
+            isFollowed = True
 
     return render(request, 'profile.html', {"isFollowed": isFollowed, "posts": posts, "viewing_profile": viewing_profile, "current_user": current_user})
     
+@login_required
+def newPost(request):
+    current_user = Profile.objects.get(user=request.user)
+    return render(request, 'createPost.html', {"current_user":current_user})
 
+@login_required
+def createPost(request):
+    current_user = Profile.objects.get(user=request.user)
+    try:
+        post = Post(user=current_user, text=request.POST['text'], image=request.FILES['image'])
+        print("object create")
+        post.save()
+        print("object save")
+        return redirect('/feed')
+    except:
+        return redirect('/newPost')
+
+@login_required
+def feed(request):
+    current_user = Profile.objects.get(user=request.user)
+    followings = Following.objects.filter(user=current_user)
+    posts=Post.objects.none()
+
+    for following in followings:
+        posts = posts | Post.objects.filter(user=following.following)
+
+    # post_ids=[]
+
+    # for post in posts:
+    #    post_ids.append(post.id)
+    
+    # post_ids.sort(reverse=True)
+    # post_ids.sort()
+    # posts=Post.objects.none()
+
+    # for post_id in post_ids:
+    #    posts = posts | Post.objects.filter(id=post_id)
+
+    return render(request, 'feed.html', {"current_user":current_user, "posts":posts})

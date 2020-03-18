@@ -9,31 +9,107 @@
             {% endblock %}
         </title>
         <style>
-            header
+            html, body 
             {
-                width: 100%;
-                text-align: center;
-                background-color: cyan;
+                margin: 0;
+                height: 100%;
+                min-height: 100%;
             }
-            footer
+            body 
             {
-                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            header,footer 
+            {
+                flex: none;
+                background-color: aqua;
                 text-align: center;
-                background-color: cyan;
+            }
+            main 
+            {
+                overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
+                flex: auto;
+            }
+            .left 
+            {   
+                height: 85%;
+                float: left;
+                width: 50%;
+                border-top: 1px solid gray;
+                height: 100%;
+                overflow: scroll;
+            }
+            .left::-webkit-scrollbar {
+                display: none;
+            }
+            .right 
+            {   
+                height: 80%;
+                float: left;
+                width: 50%;
+                background: yellow;
+                height: 100%;
+                overflow: scroll;
+            }
+            .post
+            {
+                
+            }
+            .postImage
+            {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+            .postheader
+            {
+                height: 7vh;
+                width: 100%;
+                border-bottom: 1px solid gray;
+            }
+            .postUsername
+            {   
+                height: 7vh;
+                width: 80%;
+                float: left;
+                text-align: center;
+                position: relative;
+                padding-left: 1vw;
+            }
+            .postUsername p
+            {   
+                font-weight: bold;
+                margin: 0;
                 position: absolute;
-                bottom: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .postHeaderImage
+            {   
+                width: 5vh;
+                border-radius: 50%;
+            }
+            .postHeaderImageBox
+            {   
+                height: 5vh;
+                float: left;
+                padding: 1vh;
             }
         </style>
     </head>
-    <header>
-        <h1>Panchayat</h1>
-    </header>
     <body>
-        {% block body %}
+        <header>
+            <h1>Panchayat</h1>
+        </header>
+        <main>
+            {% block body %}
 
-        {% endblock %}
+            {% endblock %}
+        </main>
+        <footer>
+            <h4>Made by Pratham</h4>
+        </footer>
     </body>
-    <footer>
-        <h4>Made by Pratham</h4>
-    </footer>
 </html>
