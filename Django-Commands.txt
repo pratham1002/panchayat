@@ -20,7 +20,18 @@ add comment in __init__.py so it can be pushed to github
 
 create urls.py in panchayat
 
-segregate views
+segregate views:
     -views
     -beforeLogin
     -afterLogin
+
+create templates directory:
+    -base.html      contains the base structure of all webpages
+
+database:
+    pip install psycopg2        (for postgres)
+    python manage.py makemigrations
+    python manage.py migrate
+
+start server:
+    python manage.py runserver

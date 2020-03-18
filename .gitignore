@@ -1,5 +1,6 @@
 .vscode/
 myvenv/
-./main/main/__pycache__/
-./main/panchayat/migrations/
+main/main/__pycache__/**
+main/panchayat/migrations/
+main/panchayat/__pycache__/
 main/main/secrets.py

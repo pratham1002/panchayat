@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from . import keyconfig
+from . import secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,11 +26,7 @@ SECRET_KEY = 'ax3l&j!-r%)u3g=61ckwnyjt-_25e4!&#%lpazmybs=%j$5vux'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '*.herokuapp.com',
-    '127.0.0.1'
-]
-
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -81,9 +77,9 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': database_name,
+        'NAME': secrets.databaseName,
         'USER': 'postgres',
-        'PASSWORD': database_password,
+        'PASSWORD': secrets.databasePassword,
         'HOST': 'localhost',
         'PORT': '5432',
     }
