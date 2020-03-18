@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block body %}
-Hello {{userdata.username}}
+Hello {{userdata.user.username}}
+<br>
+<a href="followers">Followers</a>
+<br>
+<a href="following">Following</a>
+<br>
+<a href="allUsers">All users</a>
 <br>
 <a href="logout">Logout</a>
 {% endblock %}

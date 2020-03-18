@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Panchayat - Followers
+{% endblock %}
+
+{% block body %}
+<a href="home">Home</a>
+<br>
+<p>
+    Hello {{current_user.user.username}}
+    <br>
+    Followers
+    <br>
+</p>
+<div>
+    {% for user in users %}
+        <form action="profile" method="GET">
+            <button name="person_id" value="{{user.user.id}}">{{user.user.username}}</button>
+        </form>
+        <br>
+    {% endfor %}
+</div>
+
+<a href="logout">Logout</a>
+{% endblock %}

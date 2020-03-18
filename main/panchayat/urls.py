@@ -9,4 +9,10 @@ urlpatterns = [
     path('loginUser', beforeLogin.loginUser),
     path('home', afterLogin.home),
     path('logout', afterLogin.logout),
+    path('following', afterLogin.showFollowing),
+    path('followers', afterLogin.showFollowers),
+    path('allUsers', afterLogin.showAllUsers),
+    path('followPerson', afterLogin.followPerson),
+    path('unfollowPerson', afterLogin.unfollowPerson),
+    path('profile', afterLogin.profile),
 ]

@@ -35,3 +35,6 @@ database:
 
 start server:
     python manage.py runserver
+
+handle images:
+    pip install Pillow

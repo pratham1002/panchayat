@@ -11,6 +11,8 @@
 <br>
 <form action="createUser" method="POST">
     {% csrf_token %}
+    Enter Name : <br> <input type="text" name="name" required>
+    <br>
     Enter username : <br> <input type="text" name="username" required>
     <br>
     Enter email : <br> <input type="text" name="email" required>
