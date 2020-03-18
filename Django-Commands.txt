@@ -19,3 +19,8 @@ create app:
 add comment in __init__.py so it can be pushed to github
 
 create urls.py in panchayat
+
+segregate views
+    -views
+    -beforeLogin
+    -afterLogin
