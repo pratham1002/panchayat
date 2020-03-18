@@ -1,0 +1,1 @@
+An attempt to make basic social media site using django.

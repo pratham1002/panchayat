@@ -1,0 +1,21 @@
+create virtual environment:
+    python -m venv myvenv
+
+install Django:
+    pip install django
+
+create project:
+    django-admin startproject main
+
+initialise git:
+    git init
+
+change in main directory:
+    cd main
+
+create app:
+    python manage.py startapp panchayat
+
+add comment in __init__.py so it can be pushed to github
+
+create urls.py in panchayat
