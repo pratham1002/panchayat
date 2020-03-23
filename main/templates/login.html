@@ -9,12 +9,9 @@
 <br>
 {{message}} 
 <br>
-<form action="loginUser" method="POST">
+<form action="login" method="POST">
     {% csrf_token %}
-    Enter username : <br> <input type="text" name="username" required>
-    <br>
-    Enter Password : <br> <input type="password" name="password" required>
-    <br>
-    <input type="submit">
+    {{form}}
+    <input type="submit" value="Submit">
 </form>
 {% endblock %}

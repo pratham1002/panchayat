@@ -98,9 +98,7 @@ def createPost(request):
     current_user = Profile.objects.get(user=request.user)
     try:
         post = Post(user=current_user, text=request.POST['text'], image=request.FILES['image'])
-        print("object create")
         post.save()
-        print("object save")
         return redirect('/feed')
     except:
         return redirect('/newPost')

@@ -3,56 +3,46 @@ from django.contrib.postgres.search import *
 from django.shortcuts import render, redirect
 from . import afterLogin
 from .models import Profile
-
+from .forms import loginForm, signUpForm
         
 def index(request):
     return render(request, 'index.html')
-    
-def login(request):
-    return render(request, 'login.html')
 
 def signUp(request):
-    return render(request,'signUp.html')
-
-def loginUser(request):
-    try :
-        username=request.POST['username']
-        password=request.POST['password']
-    except :
-        return render(request, 'login.html')
-    
-    user=auth.authenticate(username=username,password=password)
-    if user is not None:
-        auth.login(request,user)
-        return redirect('/home')
-
-    else:
-
-        return render(request,'login.html',{"message":"invalid password"})
-
-def createUser(request):
-    try:
-        name = request.POST['name']
-        username = request.POST['username']
-        email = request.POST['email']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-    except :
-        return render(request,'SignUp.html')
-
-    if (password1 == password2):
-        if User.objects.filter(email=email).exists() or User.objects.filter(username=username).exists():
-            return render(request,'signUp.html',{"message":"User already exists"})
-        else:
-            user = User.objects.create_user(username=username, password=password1, email=email)
+    if request.method == 'POST':
+        form = signUpForm(request.POST)
+        if form.is_valid():
+            name = request.POST['name']
+            username = request.POST['username']
+            email = request.POST['email']
+            password = request.POST['password1']
+            
+            user = User.objects.create_user(username=username, password=password, email=email)
             user.save()
             profile = Profile(user=user, name=name)
             profile.save()
-            user = auth.authenticate(username=username, password=password1)
+            user = auth.authenticate(username=username, password=password)
 
             if user is not None:
                 auth.login(request,user)
                 return redirect('/home')
-            
-    else:
-        return render(request, 'signUp.html', {"message": "Passwords Do Not Match"})
+        
+        else:
+            return render(request, 'signUp.html', {'form': form})
+
+    form = signUpForm()
+    return render(request, 'signUp.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        form = loginForm(request.POST)
+
+        if form.is_valid():
+            user = auth.authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                auth.login(request, user)
+                print(user)
+                return redirect('/home')
+
+    form = loginForm()
+    return render(request, 'login.html', {'form': form})

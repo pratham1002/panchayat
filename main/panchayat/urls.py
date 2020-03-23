@@ -5,8 +5,6 @@ urlpatterns = [
     path('', beforeLogin.index),
     path('login', beforeLogin.login),
     path('signUp', beforeLogin.signUp),
-    path('createUser', beforeLogin.createUser),
-    path('loginUser', beforeLogin.loginUser),
     path('home', afterLogin.home),
     path('logout', afterLogin.logout),
     path('following', afterLogin.showFollowing),
