@@ -25,7 +25,9 @@
 {% endif %}
 <form action="signUp" method="POST">
     {% csrf_token %}
-    {{form}}
+    {{form.as_p}}
     <input type="submit" value="Submit">
 </form>
+
+<p>Already have an Account? <a href="login">Login</a></p>
 {% endblock %}

@@ -11,7 +11,8 @@
 <br>
 <form action="login" method="POST">
     {% csrf_token %}
-    {{form}}
+    {{form.as_p}}
     <input type="submit" value="Submit">
 </form>
+<p>Don't have an Account? <a href="signUp">Sign Up</a></p>
 {% endblock %}

@@ -16,11 +16,13 @@
 <div>
     {{viewing_profile.name}}
     {% if isFollowed %}
-        <form action="unfollowPerson" method="GET">
+        <form action="unfollowPerson" method="POST">
+            {% csrf_token %}
             <button name="person_id" value="{{viewing_profile.user.id}}">Unfollow</button>
         </form>
     {% else %}
-        <form action="followPerson" method="GET">
+        <form action="followPerson" method="POST">
+            {% csrf_token %}
             <button name="person_id" value="{{viewing_profile.user.id}}">Follow</button>
         </form>
     {% endif %}

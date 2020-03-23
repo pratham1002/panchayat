@@ -35,12 +35,11 @@ def showAllUsers(request):
 @login_required
 def followPerson(request):
     current_user = Profile.objects.get(user=request.user)
-    new_follow = Profile.objects.get(user=request.GET['person_id'])
+    new_follow = Profile.objects.get(user=request.POST['person_id'])
     
     followings = Following.objects.filter(user=current_user)
 
     for following in followings:
-        print (new_follow.user.id, following.following.user.id)
         if (new_follow.user.id == following.following.user.id):
             redirect_to = '/profile?person_id=' + str(new_follow.user.id)
             return redirect(redirect_to)
@@ -52,13 +51,12 @@ def followPerson(request):
     follower.save()
 
     redirect_to = '/profile?person_id=' + str(new_follow.user.id)
-    # return redirect(redirect_to, permanent=True)
     return redirect(redirect_to)
 
 @login_required
 def unfollowPerson(request):
     current_user = Profile.objects.get(user=request.user)
-    unfollow = Profile.objects.get(user=request.GET['person_id'])
+    unfollow = Profile.objects.get(user=request.POST['person_id'])
 
     following = Following.objects.filter(user=current_user).filter(following=unfollow)
     following.delete()
@@ -67,7 +65,6 @@ def unfollowPerson(request):
     follower.delete()
 
     redirect_to = '/profile?person_id=' + str(unfollow.user.id)
-    # return redirect(redirect_to, permanent=True)
     return redirect(redirect_to)
 
 @login_required
