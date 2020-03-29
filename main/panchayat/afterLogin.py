@@ -8,7 +8,12 @@ from .forms import profileForm, postForm
 @login_required
 def home(request):
     currentUser = Profile.objects.get(user=request.user)
-    return render(request, 'home.html', {"userdata": currentUser})
+
+    context = {
+        "userdata": currentUser
+    }
+
+    return render(request, 'home.html', context)
 
 @login_required
 def logout(request):
@@ -19,19 +24,37 @@ def logout(request):
 def showFollowers(request):
     current_user = Profile.objects.get(user=request.user)
     followers = Follower.objects.filter(user=current_user)
-    return render(request, 'followers.html', {"current_user": current_user, "users": followers})      
+
+    context = {
+        "current_user": current_user,
+        "users": followers
+    }
+    
+    return render(request, 'followers.html', context)      
 
 @login_required
 def showFollowing(request):
     current_user = Profile.objects.get(user=request.user)
     followings = Following.objects.filter(user=current_user)
-    return render(request, 'following.html', {"current_user": current_user, "users": followings})
+
+    context = {
+        "current_user": current_user,
+        "users": followings
+    }
+
+    return render(request, 'following.html', context)
 
 @login_required
 def showAllUsers(request):
     current_user = Profile.objects.get(user=request.user)
     users = Profile.objects.all()
-    return render(request, 'allUsers.html', {"current_user": current_user, "users": users})
+
+    context = {
+        "current_user": current_user,
+        "users": users
+    }
+
+    return render(request, 'allUsers.html', context)
 
 @login_required
 def followPerson(request):
@@ -52,6 +75,7 @@ def followPerson(request):
     follower.save()
 
     redirect_to = '/profile?person_id=' + str(new_follow.user.id)
+
     return redirect(redirect_to)
 
 @login_required
@@ -66,6 +90,7 @@ def unfollowPerson(request):
     follower.delete()
 
     redirect_to = '/profile?person_id=' + str(unfollow.user.id)
+    
     return redirect(redirect_to)
 
 @login_required
@@ -84,7 +109,14 @@ def profile(request):
         if viewing_profile == following.following:
             isFollowed = True
 
-    return render(request, 'profile.html', {"isFollowed": isFollowed, "posts": posts, "viewing_profile": viewing_profile, "current_user": current_user})
+    context = {
+        "isFollowed": isFollowed,
+        "posts": posts,
+        "viewing_profile": viewing_profile,
+        "current_user": current_user
+    }
+
+    return render(request, 'profile.html', context)
     
 @login_required
 def newPost(request):
@@ -98,7 +130,13 @@ def newPost(request):
             return redirect('/feed')
 
     form = postForm()
-    return render(request, 'createPost.html', {"current_user":current_user, "form":form})
+
+    context = {
+        "current_user": current_user,
+        "form": form
+    }
+
+    return render(request, 'createPost.html', context)
 
 @login_required
 def feed(request):
@@ -121,7 +159,12 @@ def feed(request):
     # for post_id in post_ids:
     #    posts = posts | Post.objects.filter(id=post_id)
 
-    return render(request, 'feed.html', {"current_user": current_user, "posts": posts})
+    context = {
+        "current_user": current_user,
+        "posts": posts
+    }
+
+    return render(request, 'feed.html', context)
 
 @login_required
 def editProfile(request):

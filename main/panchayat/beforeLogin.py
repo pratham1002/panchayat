@@ -29,10 +29,19 @@ def signUp(request):
                 return redirect('/home')
         
         else:
-            return render(request, 'signUp.html', {'form': form})
+            context = {
+                'form': form
+            }
+
+            return render(request, 'signUp.html', context)
 
     form = signUpForm()
-    return render(request, 'signUp.html', {'form': form})
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'signUp.html', context)
 
 def login(request):
     if request.method == 'POST':
@@ -46,4 +55,9 @@ def login(request):
                 return redirect('/home')
 
     form = loginForm()
-    return render(request, 'login.html', {'form': form})
+
+    context = {
+        'form': form
+    }
+    
+    return render(request, 'login.html', context)
