@@ -19,12 +19,14 @@
     <div class="left">
         {% for post in posts %}
         <div class="post">
+            <a href="profile?person_id={{post.user.user.id}}" style="color: #000000; text-decoration: none;">
             <div class="postheader">
                 <div class="postHeaderImageBox">
                     <img src="{{post.user.profile_picture.url}}" alt="sad" class="postHeaderImage">
                 </div>
                 <div class="postUsername"><p>{{post.user.user.username}}</p></div>
             </div>
+            </a>
             <img src="{{post.image.url}}" alt="sad" class="postImage">
             <p>{{post.text}}</p>
         </div>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from .models import Profile, Post, Comment, Follower, Following
+from .forms import profileForm
 
 @login_required
 def home(request):
@@ -121,4 +122,8 @@ def feed(request):
     # for post_id in post_ids:
     #    posts = posts | Post.objects.filter(id=post_id)
 
-    return render(request, 'feed.html', {"current_user":current_user, "posts":posts})
+    return render(request, 'feed.html', {"current_user": current_user, "posts": posts})
+    
+def editProfile(request):
+    form = profileForm()
+    return render(request, 'editProfile.html', {"form":form})

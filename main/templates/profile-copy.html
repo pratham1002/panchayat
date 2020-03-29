@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Panchayat - View Profile
+{% endblock %}
+
+{% block body %}
+<a href="home">Home</a>
+<br>
+<p>
+    Hello {{current_user.user.username}}
+    <br> 
+    Viewing Profile {{viewing_profile.user.username}}
+    <br>
+</p>
+<div>
+    {{viewing_profile.name}}
+    {% if isFollowed %}
+        <form action="unfollowPerson" method="POST">
+            {% csrf_token %}
+            <button name="person_id" value="{{viewing_profile.user.id}}">Unfollow</button>
+        </form>
+    {% else %}
+        <form action="followPerson" method="POST">
+            {% csrf_token %}
+            <button name="person_id" value="{{viewing_profile.user.id}}">Follow</button>
+        </form>
+    {% endif %}
+</div>
+<a href="logout">Logout</a>
+{% endblock %}

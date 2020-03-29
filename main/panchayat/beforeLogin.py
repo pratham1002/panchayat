@@ -15,11 +15,12 @@ def signUp(request):
             name = request.POST['name']
             username = request.POST['username']
             email = request.POST['email']
+            date_of_birth=request.POST['date_of_birth']
             password = request.POST['password1']
             
             user = User.objects.create_user(username=username, password=password, email=email)
             user.save()
-            profile = Profile(user=user, name=name)
+            profile = Profile(user=user, name=name, date_of_birth=date_of_birth)
             profile.save()
             user = auth.authenticate(username=username, password=password)
 

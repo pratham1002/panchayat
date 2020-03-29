@@ -6,11 +6,8 @@ class Profile(models.Model):
     name = models.CharField(max_length=100)
     bio = models.CharField(max_length=256)
     profile_picture = models.ImageField(upload_to='images/', default='default.jpg')
-    date_of_birth = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.username
-
+    date_of_birth = models.DateField()
+    
 class Post(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
