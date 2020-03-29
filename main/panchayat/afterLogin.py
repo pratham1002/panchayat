@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from .models import Profile, Post, Comment, Follower, Following
-from .forms import profileForm
+from .forms import profileForm, postForm
 
 @login_required
 def home(request):
@@ -89,17 +89,16 @@ def profile(request):
 @login_required
 def newPost(request):
     current_user = Profile.objects.get(user=request.user)
-    return render(request, 'createPost.html', {"current_user":current_user})
 
-@login_required
-def createPost(request):
-    current_user = Profile.objects.get(user=request.user)
-    try:
-        post = Post(user=current_user, text=request.POST['text'], image=request.FILES['image'])
-        post.save()
-        return redirect('/feed')
-    except:
-        return redirect('/newPost')
+    if request.method == 'POST':
+        form = postForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = Post(user=current_user, text=request.POST['text'], image=request.FILES['image'])
+            post.save()
+            return redirect('/feed')
+
+    form = postForm()
+    return render(request, 'createPost.html', {"current_user":current_user, "form":form})
 
 @login_required
 def feed(request):
@@ -123,7 +122,8 @@ def feed(request):
     #    posts = posts | Post.objects.filter(id=post_id)
 
     return render(request, 'feed.html', {"current_user": current_user, "posts": posts})
-    
+
+@login_required
 def editProfile(request):
     form = profileForm()
     return render(request, 'editProfile.html', {"form":form})

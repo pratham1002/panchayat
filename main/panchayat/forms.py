@@ -33,6 +33,10 @@ class profileForm(forms.Form):
     class Meta:
         model = Profile
         fields = ['name', 'bio', 'profile_picture','date_of_birth']
+
+class postForm(forms.Form):
+    text = forms.CharField(label='text', max_length=256)
+    image=forms.ImageField(label='image')
     
 
     
