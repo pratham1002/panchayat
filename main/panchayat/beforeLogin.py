@@ -51,7 +51,6 @@ def login(request):
             user = auth.authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
                 auth.login(request, user)
-                print(user)
                 return redirect('/home')
 
     form = loginForm()
